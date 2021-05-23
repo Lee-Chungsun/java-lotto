@@ -1,12 +1,15 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos){
+        for(Lotto lotto : lottos) {
+            lotto.checkDuplicate();
+            lotto.checkLottoNumberRange();
+        }
         this.lottos = lottos;
     }
 
