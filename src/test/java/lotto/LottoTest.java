@@ -15,21 +15,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     List<Lotto> listLotto;
+    Lottos lottos;
     LottoBuy lottoBuy;
 
     @BeforeEach
     void setup() {
         listLotto = new ArrayList<Lotto>();
         lottoBuy = new LottoBuy();
-    }
-
-    @DisplayName("로또 생성 후 일급 컬렉션을 통해 당첨 번호와 일치 테스트(로또가 한장이라 가정 후 일치 갯수만 테스트)")
-    @Test
-    void countFirstCollectionLottoColle_로또_일급_컬렉션_사이즈_테스트() {
-        listLotto.add(new Lotto(() -> Arrays.asList(16,17,23,25,33,45)));
-        Lottos lottos = new Lottos(listLotto);
-        int result = lottos.countCollectNumber(new ArrayList<Integer>(Arrays.asList(12,18,23,33,40,41)));
-        assertThat(result).isEqualTo(2);
     }
 
     @DisplayName("로또 번호 유효성(중복 번호) 체크")
@@ -61,5 +53,14 @@ public class LottoTest {
     void isMinimumPay_최소_금액_예외_테스트() {
         assertThatThrownBy(() -> lottoBuy.buyLotto(900))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("구매 로또 번호와 당첨 번호 비교하여 맞은 갯수 확인 테스트")
+    @Test
+    void countCollectNumber_일치_번호_갯수() {
+        listLotto.add(new Lotto(() -> Arrays.asList(16,17,23,25,33,45)));
+        lottos = new Lottos(listLotto);
+        LottoResult lottoResult = lottos.compareCollectNumber(new ArrayList<Integer>(Arrays.asList(16,17,23,33,40,41)));
+        assertThat(lottoResult.getThirdCount()).isEqualTo(1);
     }
 }
