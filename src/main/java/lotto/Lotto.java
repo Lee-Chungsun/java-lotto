@@ -42,4 +42,8 @@ public class Lotto {
             throw new IllegalArgumentException(lottoNumber.toString() + " " + RANGE_EXCEPTION_MSG);
         }
     }
+
+    public String toString() {
+        return lottoNumber.toString();
+    }
 }

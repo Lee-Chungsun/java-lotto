@@ -13,12 +13,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int countCollectNumber(List<Integer> winLottoNumber) {
-        int result = 0;
+    public LottoResult compareCollectNumber(List<Integer> winLottoNumber) {
+        LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottos) {
-            result = compareUserLottoAndWinLotto(lotto, winLottoNumber);
+            lottoResult.checkRank(compareUserLottoAndWinLotto(lotto, winLottoNumber));
         }
-        return result;
+        return lottoResult;
     }
 
     private int compareUserLottoAndWinLotto(Lotto lotto, List<Integer> winLottoNumber) {

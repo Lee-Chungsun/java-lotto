@@ -16,13 +16,14 @@ public class LottoBuy {
         this.lottoList = new ArrayList<>();
     }
 
-    public void buyLotto(int pay) {
+    public Lottos buyLotto(int pay) {
         checkMinimumPay(pay);
         this.lottoCount = pay / LOTTO_COST;
         for(int count = 0; count < lottoCount; count++) {
             lottoList.add(new Lotto(new LottoRandomUtils().createRandomLotto()));
         }
         lottos = new Lottos(lottoList);
+        return lottos;
     }
 
     private void checkMinimumPay(int pay) {
