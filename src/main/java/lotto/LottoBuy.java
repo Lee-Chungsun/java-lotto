@@ -3,7 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoMain {
+public class LottoBuy {
     private static final int LOTTO_COST = 1000;
     private static final String MINIMUM_PAY_EXCEPTION_MSG = "최소금액은 " + LOTTO_COST + "원입니다.";
 
@@ -12,7 +12,7 @@ public class LottoMain {
     private Lottos lottos;
     private int lottoCount = 0;
 
-    public LottoMain() {
+    public LottoBuy() {
         this.lottoList = new ArrayList<>();
     }
 
