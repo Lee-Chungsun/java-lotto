@@ -28,4 +28,8 @@ public class Lottos {
         }
         return result;
     }
+
+    public boolean isLottoCount(int lottoCount) {
+        return lottoCount == lottos.size();
+    }
 }
