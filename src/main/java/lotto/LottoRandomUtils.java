@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoRandomUtils {
+public class LottoRandomUtils implements CreateRandomLotto {
     private final List<Integer> lottoRange = new ArrayList<Integer>();
 
     public LottoRandomUtils(){
