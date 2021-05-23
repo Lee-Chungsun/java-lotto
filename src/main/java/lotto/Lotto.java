@@ -1,10 +1,13 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
     private final List<Integer> numberList;
+
+    public Lotto() {
+        this.numberList = new LottoRandomUtils().createRandomLotto();
+    }
 
     public Lotto(List<Integer> numberList) {
         this.numberList = numberList;

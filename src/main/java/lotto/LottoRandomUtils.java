@@ -1,11 +1,11 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoRandomUtils {
-    private static final List<Integer> lottoRange = new ArrayList<Integer>();
+    private final List<Integer> lottoRange = new ArrayList<Integer>();
 
     public LottoRandomUtils(){
         for (int number = 1; number < 46; number++) {
@@ -14,6 +14,12 @@ public class LottoRandomUtils {
     }
 
     public List<Integer> createRandomLotto() {
-        Collection.
+        Collections.shuffle(lottoRange);
+        List<Integer> randomLotto = new ArrayList<Integer>();
+        for (int count = 0; count < 6; count++) {
+            randomLotto.add(lottoRange.get(count));
+        }
+        Collections.sort(randomLotto);
+        return randomLotto;
     }
 }
