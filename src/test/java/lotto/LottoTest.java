@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,10 +16,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     List<Lotto> listLotto;
+    LottoMain lottoMain;
 
     @BeforeEach
     void setup() {
         listLotto = new ArrayList<Lotto>();
+        lottoMain = new LottoMain();
     }
 
     @DisplayName("로또 생성 후 일급 컬렉션을 통해 당첨 번호와 일치 테스트(로또가 한장이라 가정 후 일치 갯수만 테스트)")
@@ -42,6 +46,21 @@ public class LottoTest {
     void isLottoNumberRange_번호_범위_체크() {
         listLotto.add(new Lotto(() -> Arrays.asList(16,17,23,25,33,50)));
         assertThatThrownBy(() -> new Lottos(listLotto))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("구매 금액의 1000단위로 로또 정상 사이즈 생성 되는지 테스트")
+    @ParameterizedTest(name ="{displayName}[{index}] 지불금액={0}, 로또 갯수={1}, 결과={2}")
+    @CsvSource(value = {"14100:14:true", "1200:1:true", "2500:3:false"}, delimiter = ':')
+    void countLotto_금액만큼_로또_생성_테스트(int pay, int lottoCount, boolean expected) {
+        lottoMain.buyLotto(pay);
+        assertThat(lottoMain.isLottoCount(lottoCount)).isEqualTo(expected);
+    }
+
+    @DisplayName("로또 구매 시 최소 금액 예외 테스트")
+    @Test
+    void isMinimumPay_최소_금액_예외_테스트() {
+        assertThatThrownBy(() -> lottoMain.buyLotto(900))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
