@@ -10,15 +10,19 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int countCollectNumber(List<Integer> winLotto) {
+    public int countCollectNumber(List<Integer> winLottoNumber) {
         int result = 0;
         for (Lotto lotto : lottos) {
-            //result += searchCollectNumber(lotto);
+            result = compareUserLottoAndWinLotto(lotto, winLottoNumber);
         }
         return result;
     }
 
-    /*private int searchCollectNumber(Integer lotto) {
-        return numberList.contains(lotto) ? 1 : 0;
-    }*/
+    private int compareUserLottoAndWinLotto(Lotto lotto, List<Integer> winLottoNumber) {
+        int result = 0;
+        for (Integer lottoNumber : winLottoNumber) {
+            result += lotto.searchCollectNumber(lottoNumber);
+        }
+        return result;
+    }
 }
